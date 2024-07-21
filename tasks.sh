@@ -194,6 +194,14 @@ case "${COMMAND}" in
       GDB=gdb-multiarch gdb-add-index vmlinux
     fi
     ;;
+# Build User mode linux 
+  "uml")
+    echo "Build User Mode Linux "
+    make clean
+    make mrproper
+    make defconfig ARCH=um SUBARCH=x86_64
+    make linux ARCH=um SUBARCH=x86_64 -j `nproc`
+    ;;
 # Rootfs management
   "create-rootfs")
     # Only generate a rootfs if it doesn't already exist
